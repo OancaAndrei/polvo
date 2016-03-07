@@ -1,4 +1,5 @@
 path = require 'path'
+upath = require 'upath'
 fs = require 'fs'
 
 config = require '../utils/config'
@@ -84,7 +85,7 @@ resolve_file = ( filepath )->
 # ------------------------------------------------------------------------------
 resolve_index = ( dirpath )->
   # if dirpath?
-  filepath = path.join dirpath, 'index'
+  filepath = upath.join dirpath, 'index'
   for ext in exts
     tmp =  filepath
     tmp += ext
@@ -101,7 +102,7 @@ resolve_module = (kind, manifest, filepath, id = '')->
   if config.alias?
     for map, location of config.alias
       if id.indexOf(map) is 0
-        nmods = path.join dirs.pwd, location
+        nmods = upath.join dirs.pwd, location
         if ~id.indexOf('/')
           id = id.match(/\/(.+)/)[0]
         else
@@ -119,8 +120,8 @@ resolve_module = (kind, manifest, filepath, id = '')->
   return null unless nmods?
 
   # trying to reach the `main` entry in manifest (if there's one)
-  mod = path.join nmods, id
-  json = path.join mod, manifest
+  mod = upath.join nmods, id
+  json = upath.join mod, manifest
   if json and fs.existsSync json
 
     # tries to get the main entry in manifest
@@ -128,9 +129,9 @@ resolve_module = (kind, manifest, filepath, id = '')->
     if main?
 
       # trying to get it as is
-      main = path.join (path.dirname json), main
+      main = upath.join (path.dirname json), main
       if (file = resolve_file main)?
-        return file 
+        return file
 
       # or as a folder with an index file inside
       return file if (file = resolve_index main)?
@@ -139,9 +140,9 @@ resolve_module = (kind, manifest, filepath, id = '')->
       # if there's no main entry, tries to get the index file
       if (file = resolve_index mod)?
         return file
-  
+
   # if there's no json, move on with other searches
-  idpath = (path.join nmods, id)
+  idpath = (upath.join nmods, id)
 
   # tries to get file as is
   return file if (file = resolve_file idpath)?
@@ -150,24 +151,24 @@ resolve_module = (kind, manifest, filepath, id = '')->
   return file if (file = resolve_index idpath)?
 
   # keep searching on parent node_module's folders
-  if filepath isnt '/' and non_recurse isnt true
-    resolve_module kind, manifest, path.join(filepath, '..'), id
+  if filepath isnt path.parse(filepath).root and non_recurse isnt true
+    resolve_module kind, manifest, upath.join(filepath, '..'), id
 
 
 # searches for the closest node_modules folder in the parent dirs
 # ------------------------------------------------------------------------------
 closest_mod_folder = (kind, filepath)->
-  if (path.extname filepath) isnt '' 
+  if (path.extname filepath) isnt ''
     if not fs.lstatSync(filepath).isDirectory()
       tmp = path.dirname filepath
 
   tmp or= filepath
 
-  while tmp isnt '/'
-    nmods = path.join tmp, kind
+  while tmp isnt path.parse(tmp).root
+    nmods = upath.join tmp, kind
     if fs.existsSync nmods
       return nmods
     else
-      tmp = path.join tmp, '..'
+      tmp = upath.join tmp, '..'
 
   return null

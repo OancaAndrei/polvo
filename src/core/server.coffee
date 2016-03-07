@@ -1,4 +1,5 @@
 path = require 'path'
+upath = require 'upath'
 fs = require 'fs'
 
 connect = require 'connect'
@@ -17,7 +18,7 @@ refresher = null
 module.exports = ->
   {root, port} = config.server
 
-  index = path.join root, 'index.html'
+  index = upath.join root, 'index.html'
 
   # simple static server with 'connect'
   app = connect()

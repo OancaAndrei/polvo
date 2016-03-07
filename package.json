@@ -50,7 +50,8 @@
     "polvo-jade": "0.2.x",
     "polvo-stylus": "0.1.x",
     "polvo-css": "0.1.x",
-    "humanize": "0.0.x"
+    "humanize": "0.0.x",
+	"upath": "^0.1.7"
   },
   "devDependencies": {
     "coffee-script": "1.6.x",

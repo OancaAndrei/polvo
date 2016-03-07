@@ -1,4 +1,5 @@
 path = require 'path'
+upath = require 'upath'
 fs = require 'fs'
 fsu = require 'fs-util'
 _ = require 'lodash'
@@ -60,7 +61,7 @@ module.exports = new class Files
     file.on 'new:dependencies', @bulk_create_file
     file.on 'refresh:dependents', @refresh_dependents
     file.init()
-    
+
     if argv.watch and not @is_under_inputs filepath
       @watch_file file.filepath
 
@@ -78,7 +79,7 @@ module.exports = new class Files
     if consider_aliases
       alias = true
       for map, dirpath of config.alias
-        dirpath = path.join dirs.pwd, dirpath
+        dirpath = upath.join dirs.pwd, dirpath
         alias and= filepath.indexOf(dirpath) is 0
 
     input or alias
@@ -151,12 +152,12 @@ module.exports = new class Files
             @extract_file depath
 
         # them refresh dependencies and dependents
-        
+
         # partial may have dependents
         if file.is_partial
           for dep in file.dependents
             _.find(@files, filepath: dep.filepath).refresh()
-        
+
         # non-partials may be a dependency for another files
         else
           for f in @files
@@ -173,7 +174,7 @@ module.exports = new class Files
 
         # THIS PROBLEM HAS BEEN RESOLVED (APPARENTLY) - will be kept here for
         # a little more to confirm.
-        # 
+        #
         # if file is null
         #   msg = "Change file is apparently null, it shouldn't happened.\n"
         #   msg += "Please report this at the repo issues section."

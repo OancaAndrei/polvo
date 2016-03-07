@@ -1,5 +1,6 @@
 fs = require 'fs'
 path = require 'path'
+upath = require 'upath'
 
 _ = require 'lodash'
 
@@ -80,7 +81,7 @@ module.exports = class File extends MicroEvent
 
   parse_conditional_block:(block)->
 
-    buffer = '' 
+    buffer = ''
     passed = 0
     capturing = false
 
@@ -145,4 +146,4 @@ module.exports = class File extends MicroEvent
   get_compiler:->
     for plugin in plugins
       if plugin.ext.test @filepath
-        return plugin 
+        return plugin

@@ -1,10 +1,11 @@
 path = require 'path'
+upath = require 'upath'
 fs = require 'fs'
 
 {error, warn, info, debug, log} = require('./logger')('utils/dirs')
 {argv} = require '../cli'
 
-exports.root = path.join __dirname, '..', '..'
+exports.root = upath.join __dirname, '..', '..'
 
 if argv.base?
   unless fs.existsSync (pwd = path.resolve argv.base)
@@ -16,4 +17,4 @@ else
 exports.pwd = pwd
 
 exports.relative = (filepath)->
-  path.relative exports.pwd, filepath
+  upath.normalize path.relative(exports.pwd, filepath)

@@ -1,5 +1,6 @@
 fs = require 'fs'
 path = require 'path'
+upath = require 'upath'
 
 fsu = require 'fs-util'
 
@@ -13,18 +14,18 @@ module.exports = components = []
 # - if found, search for every `component.json` manifes file inside of it
 # - returns the found manifests or an empty array
 find_manifests = ->
-  base = path.join dirs.pwd
-  
-  while base isnt '/'
-    manifest = path.join base, 'component.json'
+  base = upath.join dirs.pwd
+
+  while base isnt path.parse(base).root
+    manifest = upath.join base, 'component.json'
 
     if fs.existsSync manifest
-      components_folder = path.join base, 'components'
+      components_folder = upath.join base, 'components'
       if fs.existsSync components_folder
         manifests = fsu.find components_folder, /component\.json/
         return manifests
 
-    base = path.join base, '..'
+    base = upath.join base, '..'
 
   return []
 
@@ -42,5 +43,5 @@ for manifest_path in manifests
   kinds = 'styles scripts templates fonts files images'.split ' '
   for kind in kinds when manifest[kind]?
     for filepath in manifest[kind]
-      abs = path.join comp_folder, filepath
+      abs = upath.join comp_folder, filepath
       components.push abs
