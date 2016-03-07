@@ -48,7 +48,7 @@
     "polvo-jade": "0.2.x",
     "polvo-js": "0.1.x",
     "polvo-stylus": "0.1.x",
-    "socket.io": "0.9.x",
+    "socket.io": "^1.4.5",
     "source-map-support": "0.2.x",
     "uglify-js": "2.4.x",
     "upath": "^0.1.7"
