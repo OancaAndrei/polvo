@@ -39,7 +39,7 @@ split_loader = fs.readFileSync split_loader_path, 'utf-8'
 
 # auto reload
 io_path = upath.join dirs.root, 'node_modules', 'socket.io', 'node_modules'
-io_path = upath.join io_path, 'socket.io-client', 'dist', 'socket.io.js'
+io_path = upath.join io_path, 'socket.io-client', 'socket.io.js'
 reloader_path = loader_path.replace 'loader.js', 'reloader.js'
 
 auto_reload = fs.readFileSync io_path, 'utf-8'
