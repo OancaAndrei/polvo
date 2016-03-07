@@ -2,6 +2,7 @@ _ = require 'lodash'
 
 fs = require 'fs'
 path = require 'path'
+upath = require 'upath'
 util = require 'util'
 
 dirs = require '../utils/dirs'
@@ -11,14 +12,14 @@ plugins = []
 registered = {}
 
 get_plugin_manifest = ( folder, plugin )->
-  manifest = path.join folder, 'node_modules', plugin, 'package.json'
+  manifest = upath.join folder, 'node_modules', plugin, 'package.json'
   return manifest if fs.existsSync manifest
 
-  return null if folder is path.join folder, '..'
-  get_plugin_manifest path.join(folder, '..'), plugin
+  return null if folder is upath.join folder, '..'
+  get_plugin_manifest upath.join(folder, '..'), plugin
 
 scan = (folder)->
-  manifest_path = path.join folder, 'package.json'
+  manifest_path = upath.join folder, 'package.json'
   manifest = require manifest_path
 
   for plugin of manifest.dependencies
@@ -34,9 +35,9 @@ scan = (folder)->
       registered[pmanifest.name] = true
       plugins.push require plugin
 
-scan path.join dirs.root
+scan upath.join dirs.root
 
-app_json = path.join dirs.pwd, 'package.json'
+app_json = upath.join dirs.pwd, 'package.json'
 if fs.existsSync app_json
   scan dirs.pwd
 else

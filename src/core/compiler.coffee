@@ -4,6 +4,7 @@ zlib = require 'zlib'
 
 fsu = require 'fs-util'
 path = require 'path'
+upath = require 'upath'
 humanize = require 'humanize'
 
 files = require './files'
@@ -25,20 +26,20 @@ log_compiled = logger.file.compiled
 prefix = ";(function(){"
 
 # helpers folder path
-helpers_path = path.join dirs.root, 'src', 'core', 'helpers'
+helpers_path = upath.join dirs.root, 'src', 'core', 'helpers'
 
 # cjs loader
-loader_path = path.join helpers_path, 'loader.js'
+loader_path = upath.join helpers_path, 'loader.js'
 loader = fs.readFileSync loader_path, 'utf-8'
 loader = loader.replace '~ALIASES', JSON.stringify config.alias
 
 # split loader
-split_loader_path = path.join helpers_path, 'split.loader.js'
+split_loader_path = upath.join helpers_path, 'split.loader.js'
 split_loader = fs.readFileSync split_loader_path, 'utf-8'
 
 # auto reload
-io_path = path.join dirs.root, 'node_modules', 'socket.io', 'node_modules'
-io_path = path.join io_path, 'socket.io-client', 'dist', 'socket.io.js'
+io_path = upath.join dirs.root, 'node_modules', 'socket.io', 'node_modules'
+io_path = upath.join io_path, 'socket.io-client', 'dist', 'socket.io.js'
 reloader_path = loader_path.replace 'loader.js', 'reloader.js'
 
 auto_reload = fs.readFileSync io_path, 'utf-8'
@@ -75,7 +76,7 @@ exports.release = (done) ->
     for js in jss
       pending++
 
-      uncompressed = fs.readFileSync path.join js
+      uncompressed = fs.readFileSync upath.join js
       fs.writeFileSync js, minify.js uncompressed.toString()
       exports.notify js, after
 
@@ -90,7 +91,7 @@ exports.build_js = (notify) ->
   files.files = _.sortBy files.files, 'filepath'
 
   all = _.filter files.files, output: 'js'
-  
+
   return unless all.length
 
   unless config.output.js?
@@ -180,7 +181,7 @@ exports.build_js = (notify) ->
     buffer += "\n"
     base64_maps = sourcemaps.encode_base64 src_maps
     buffer += source_maps_header.replace '~MAP', base64_maps
-  
+
   buffer += sufix
 
   fs.writeFileSync config.output.js, buffer
@@ -259,14 +260,14 @@ build_js_split = (files, notify)->
     filename = path.basename(file.filepath).replace file.compiler.ext, '.js'
     filefolder = path.dirname file.filepath
 
-    httpath = path.join '__split__', filefolder.replace(base, ''), filename
-    output = path.join path.dirname(config.output.js), httpath
+    httpath = upath.join '__split__', filefolder.replace(base, ''), filename
+    output = upath.join path.dirname(config.output.js), httpath
 
     paths.push output
     buffer = file.wrapped
 
     if file.source_map?
-      
+
       # hard moving offset to 1 (jumping over module registration)
       file.source_map_offset = 1
       map = sourcemaps.assemble [file]
@@ -280,7 +281,7 @@ build_js_split = (files, notify)->
       fsu.mkdir_p folder
 
     fs.writeFileSync output, buffer
-    
+
     if notify
       exports.notify output
 

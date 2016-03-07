@@ -1,4 +1,5 @@
 path = require 'path'
+upath = require 'upath'
 fs = require 'fs'
 util = require 'util'
 
@@ -11,9 +12,9 @@ dirs = require './dirs'
 
 if dirs.pwd?
   if argv['config-file']?
-    config_path = path.join dirs.pwd, argv['config-file']
+    config_path = upath.join dirs.pwd, argv['config-file']
   else
-    config_path = path.join dirs.pwd, "polvo.yml"
+    config_path = upath.join dirs.pwd, "polvo.yml"
 
 if fs.existsSync config_path
   if fs.statSync( config_path ).isDirectory()
@@ -32,8 +33,8 @@ parse_config = ->
 
     config.server.port ?= 3000
     if config.server.root
-      root = config.server.root = path.join dirs.pwd, config.server.root
-      unless fs.existsSync root 
+      root = config.server.root = upath.join dirs.pwd, config.server.root
+      unless fs.existsSync root
         if argv.server
           return error 'Server\'s root dir does not exist ~>', root
     else if argv.server
@@ -45,7 +46,7 @@ parse_config = ->
   # input
   if config.input? and config.input.length
     for dirpath, index in config.input
-      tmp = config.input[index] = path.join dirs.pwd, dirpath
+      tmp = config.input[index] = upath.join dirs.pwd, dirpath
       unless fs.existsSync tmp
         return error 'Input dir does not exist ~>', dirs.relative tmp
   else
@@ -55,7 +56,7 @@ parse_config = ->
   if config.output?
 
     if config.output.js?
-      config.output.js = path.join dirs.pwd, config.output.js
+      config.output.js = upath.join dirs.pwd, config.output.js
 
       reg = /\{(\w+)\}/g
       while (res = reg.exec config.output.js)?
@@ -67,7 +68,7 @@ parse_config = ->
         return error 'JS\'s output dir does not exist ~>', dirs.relative tmp
 
     if config.output.css?
-      config.output.css = path.join dirs.pwd, config.output.css
+      config.output.css = upath.join dirs.pwd, config.output.css
 
       reg = /\{(\w+)\}/g
       while (res = reg.exec config.output.css)?
@@ -84,7 +85,7 @@ parse_config = ->
   # alias
   if config.alias?
     for name, location of config.alias
-      abs_location = path.join dirs.pwd, location
+      abs_location = upath.join dirs.pwd, location
       unless fs.existsSync abs_location
         return error "Alias '#{name}' does not exist ~>", location
       else
@@ -101,7 +102,7 @@ parse_config = ->
   unless config.boot?
     return error "Boot module not informed in config file"
   else
-    config.boot = path.join dirs.pwd, config.boot
+    config.boot = upath.join dirs.pwd, config.boot
     config.boot = dirs.relative config.boot
 
 
