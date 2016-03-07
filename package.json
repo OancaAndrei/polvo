@@ -35,7 +35,7 @@
   "dependencies": {
     "colors": "0.6.x",
     "connect": "2.12.x",
-    "fs-util": "0.3.x",
+    "fs-util": "oancaandrei/fs-util",
     "optimist": "0.6.x",
     "socket.io": "0.9.x",
     "source-map-support": "0.2.x",
