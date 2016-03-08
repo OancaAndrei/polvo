@@ -3,6 +3,7 @@ upath = require 'upath'
 fs = require 'fs'
 
 connect = require 'connect'
+http = require 'http'
 io = require 'socket.io'
 
 dirs = require '../utils/dirs'
@@ -13,6 +14,7 @@ sourcemaps = require '../utils/sourcemaps'
 {error, warn, info, debug, log} = require('../utils/logger')('core/server')
 
 app = null
+server = null
 refresher = null
 
 module.exports = ->
@@ -29,19 +31,20 @@ module.exports = ->
         res.end 'File not found: ' + req.url
       else
         res.end fs.readFileSync index, 'utf-8'
-    ).listen port
+    )
+  server = http.createServer(app).listen port
 
   address = 'http://localhost:' + port
   log "♫  #{address}"
 
   unless argv.r
-    refresher = io.listen 53211, 'log level': 1
+    refresher = new io 53211, 'log level': 1
 
   module.exports
 
 module.exports.close = ->
-  app?.close()
-  refresher?.server.close()
+  server?.close()
+  refresher?.httpServer.close();
 
 module.exports.reload = ( type )->
   return unless refresher?
