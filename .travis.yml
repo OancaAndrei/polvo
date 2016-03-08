@@ -3,7 +3,7 @@ language: node_js
 
 node_js: "0.12"
 
-install: make test.install.dependencies
+before_script: make test.install.dependencies
 
 script: make test.coverage.coveralls
 
