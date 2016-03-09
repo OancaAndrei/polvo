@@ -18,7 +18,7 @@ describe '[acceptance] watch', ->
     server = null
 
     options = compile:true, server: 'true', base: basic
-    stdio = 
+    stdio =
       nocolor: true
       err:(msg) -> errors++
       out:(msg) ->
@@ -30,7 +30,7 @@ describe '[acceptance] watch', ->
               exec 'curl -I localhost:8080/fake.js', (err, stdout, stderr)->
                 /HTTP\/1\.1 404 Not Found/.test(stdout).should.be.true
                 exec 'curl -I localhost:8080/route', (err, stdout, stderr)->
-                  /HTTP\/1\.1 200 OK/.test(stdout).should.be.true
+                  /HTTP\/1\.1 404 Not Found/.test(stdout).should.be.true # this test changes with serve-static
                   done()
                   server.close()
                   errors.should.equal 0
