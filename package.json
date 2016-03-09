@@ -62,6 +62,6 @@
     "istanbul": "0.4.x",
     "coveralls": "2.11.x",
     "bower": "^1.7.7",
-    "component": "1.1.x"
+    "component": "^0.19.9"
   }
 }
