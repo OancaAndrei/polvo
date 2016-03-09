@@ -55,12 +55,12 @@
     "upath": "^0.1.7"
   },
   "devDependencies": {
-    "coffee-script": "1.6.x",
+    "coffee-script": "1.10.x",
     "mversion": "0.3.x",
     "chai": "1.8.x",
     "mocha": "2.4.x",
-    "istanbul": "0.2.x",
-    "coveralls": "2.6.x",
+    "istanbul": "0.4.x",
+    "coveralls": "2.11.x",
     "bower": "^1.7.7",
     "component": "^0.19.9"
   }
