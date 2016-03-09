@@ -50,7 +50,7 @@
     "polvo-stylus": "0.1.x",
     "socket.io": "^1.4.5",
     "source-map-support": "0.2.x",
-    "uglify-js": "2.4.x",
+    "uglify-js": "2.6.x",
     "upath": "^0.1.7"
   },
   "devDependencies": {
