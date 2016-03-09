@@ -24,7 +24,6 @@ module.exports = ->
 
   # simple static server with 'connect'
   app = connect()
-    .use( connect.static root )
     .use( (req, res)->
       if ~(req.url.indexOf '.')
         res.statusCode = 404
