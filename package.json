@@ -43,7 +43,7 @@
     "lodash": "2.4.x",
     "optimist": "0.6.x",
     "polvo-cs": "0.1.x",
-    "polvo-css": "1.x",
+    "polvo-css": "1.0.0",
     "polvo-html": "0.1.x",
     "polvo-jade": "0.2.x",
     "polvo-js": "0.1.x",
