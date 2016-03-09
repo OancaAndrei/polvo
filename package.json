@@ -40,7 +40,7 @@
     "fs-util": "oancaandrei/fs-util",
     "humanize": "0.0.x",
     "js-yaml": "3.5.x",
-    "lodash": "2.4.x",
+    "lodash": "4.6.x",
     "optimist": "0.6.x",
     "polvo-cs": "0.1.x",
     "polvo-css": "0.1.x",
