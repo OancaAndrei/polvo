@@ -8,4 +8,4 @@ exports.js = ( uncompressed )->
   compiled = stream.toString()
 
 exports.css = ( uncompressed )->
-  new CleanCSS().minify uncompressed
+  new CleanCSS().minify(uncompressed).styles

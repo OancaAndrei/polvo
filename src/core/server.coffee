@@ -2,8 +2,10 @@ path = require 'path'
 upath = require 'upath'
 fs = require 'fs'
 
-connect = require 'connect'
 http = require 'http'
+finalhandler = require 'finalhandler'
+servestatic = require 'serve-static'
+
 io = require 'socket.io'
 
 dirs = require '../utils/dirs'
@@ -22,17 +24,14 @@ module.exports = ->
 
   index = upath.join root, 'index.html'
 
-  # simple static server with 'connect'
-  app = connect()
-    .use( connect.static root )
-    .use( (req, res)->
-      if ~(req.url.indexOf '.')
-        res.statusCode = 404
-        res.end 'File not found: ' + req.url
-      else
-        res.end fs.readFileSync index, 'utf-8'
-    )
-  server = http.createServer(app).listen port
+  # simple static server with 'serve-static'
+  serve = servestatic root
+
+  server = http.createServer (req, res) ->
+    done = finalhandler req, res
+    serve req, res, done
+
+  server.listen port
 
   address = 'http://localhost:' + port
   log "♫  #{address}"

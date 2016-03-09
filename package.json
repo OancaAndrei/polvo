@@ -33,14 +33,14 @@
     "node": ">= 0.10"
   },
   "dependencies": {
-    "clean-css": "2.0.x",
+    "clean-css": "3.4.x",
     "colors": "0.6.x",
-    "connect": "2.12.x",
     "esprima": "1.2.x",
+    "finalhandler": "^0.4.1",
     "fs-util": "oancaandrei/fs-util",
     "humanize": "0.0.x",
     "js-yaml": "3.5.x",
-    "lodash": "2.4.x",
+    "lodash": "4.6.x",
     "optimist": "0.6.x",
     "polvo-cs": "0.1.x",
     "polvo-css": "0.1.x",
@@ -48,9 +48,10 @@
     "polvo-jade": "0.2.x",
     "polvo-js": "0.1.x",
     "polvo-stylus": "0.1.x",
+    "serve-static": "^1.10.2",
     "socket.io": "^1.4.5",
     "source-map-support": "0.4.x",
-    "uglify-js": "2.4.x",
+    "uglify-js": "2.6.x",
     "upath": "^0.1.7"
   },
   "devDependencies": {
