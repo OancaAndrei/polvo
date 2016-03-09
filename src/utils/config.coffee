@@ -22,7 +22,7 @@ if fs.existsSync config_path
    # process.exit()
   else
     config_contents = fs.readFileSync config_path, 'utf8'
-    config = yaml.safeLoad(config_contents) or {}
+    config = yaml.safeLoad(config_contents, json: true) or {}
 else
   error 'Config file not found ~>', config_path
   # process.exit()
