@@ -1,8 +1,6 @@
 {
   "name": "polvo-bower-deps",
   "dependencies": {
-    "is-regexp": "*",
-    "is-plain-obj": "*",
     "stringify-object": "*"
   }
 }
