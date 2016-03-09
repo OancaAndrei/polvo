@@ -2,7 +2,7 @@
 
 [![Stories in Ready](https://badge.waffle.io/polvo/polvo.png)](http://waffle.io/polvo/polvo)
 
-[![Build Status](https://travis-ci.org/polvo/polvo.png?branch=master)](http://travis-ci.org/polvo/polvo) [![Coverage Status](https://coveralls.io/repos/polvo/polvo/badge.png)](https://coveralls.io/r/polvo/polvo)
+[![Build Status](https://travis-ci.org/OancaAndrei/polvo.svg?branch=master)](https://travis-ci.org/OancaAndrei/polvo) [![Coverage Status](https://coveralls.io/repos/polvo/polvo/badge.png)](https://coveralls.io/r/polvo/polvo)
 
 [![Dependency Status](https://gemnasium.com/polvo/polvo.png)](https://gemnasium.com/polvo/polvo) [![NPM version](https://badge.fury.io/js/polvo.png)](http://badge.fury.io/js/polvo)
 
