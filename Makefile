@@ -36,8 +36,8 @@ test.install.dependencies:
 	@cd tests/fixtures/package-systems && ../../../$(COMPONENT) install
 
 
-test: build 
-	@$(MOCHA) --compilers coffee:coffee-script \
+test: build
+	@$(MOCHA) --compilers coffee:coffee-script/register \
 		--ui bdd \
 		--reporter spec \
 		--recursive \
@@ -46,7 +46,7 @@ test: build
 
 test.coverage: build
 	@$(ISTANBUL) cover $(_MOCHA) -- \
-		--compilers coffee:coffee-script \
+		--compilers coffee:coffee-script/register \
 		--ui bdd \
 		--reporter spec \
 		--recursive \
