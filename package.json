@@ -35,7 +35,7 @@
   "dependencies": {
     "clean-css": "3.4.x",
     "colors": "0.6.x",
-    "connect": "2.12.x",
+    "connect": "3.4.x",
     "esprima": "1.2.x",
     "fs-util": "oancaandrei/fs-util",
     "humanize": "0.0.x",
