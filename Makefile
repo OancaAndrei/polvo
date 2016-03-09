@@ -10,11 +10,13 @@ COVERALLS=node_modules/coveralls/bin/coveralls.js
 
 
 POLVO=bin/polvo
-
+BOWER=node_modules/.bin/bower
+COMPONENT=node_modules/.bin/component
 
 
 setup:
 	@npm link
+	@make test.install.dependencies
 
 
 
@@ -26,15 +28,15 @@ build:
 
 test.clean:
 	@git clean -fdx tests/fixtures
-	@make test.dependencies
+	@make test.install.dependencies
 
-test.dependencies:
+test.install.dependencies:
 	@cd tests/fixtures/package-systems && npm install
-	@cd tests/fixtures/package-systems && bower install
-	@cd tests/fixtures/package-systems && component install
+	@cd tests/fixtures/package-systems && ../../../$(BOWER) install
+	@cd tests/fixtures/package-systems && ../../../$(COMPONENT) install
 
 
-test: build
+test: build 
 	@$(MOCHA) --compilers coffee:coffee-script \
 		--ui bdd \
 		--reporter spec \
