@@ -48,9 +48,9 @@
     "polvo-jade": "0.2.x",
     "polvo-js": "0.1.x",
     "polvo-stylus": "0.1.x",
-    "socket.io": "^1.4.5",
-    "source-map-support": "0.2.x",
-    "uglify-js": "2.6.x",
+    "socket.io": "0.9.x",
+    "source-map-support": "0.4.x",
+    "uglify-js": "2.4.x",
     "upath": "^0.1.7"
   },
   "devDependencies": {
@@ -59,8 +59,6 @@
     "chai": "1.8.x",
     "mocha": "1.17.x",
     "istanbul": "0.2.x",
-    "coveralls": "2.6.x",
-    "bower": "^1.7.7",
-    "component": "^0.19.9"
+    "coveralls": "2.6.x"
   }
 }
