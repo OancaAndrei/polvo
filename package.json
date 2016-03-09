@@ -33,9 +33,9 @@
     "node": ">= 0.10"
   },
   "dependencies": {
-    "clean-css": "2.0.x",
-    "colors": "1.1.x",
-    "connect": "3.4.x",
+    "clean-css": "3.4.x",
+    "colors": "0.6.x",
+    "connect": "2.12.x",
     "esprima": "1.2.x",
     "fs-util": "oancaandrei/fs-util",
     "humanize": "0.0.x",
