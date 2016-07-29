@@ -17,6 +17,7 @@
   ],
   "main": "./lib/polvo",
   "scripts": {
+    "compile": "coffee --compile --output lib/ src/",
     "test": "make test"
   },
   "dirs": {
